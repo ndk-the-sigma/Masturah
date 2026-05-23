@@ -1,0 +1,2 @@
+Masturah Babawale — CV / Resume
+Replace this placeholder file with your actual CV (PDF). Save as public/cv.pdf and update the link in SiteChrome.tsx.
