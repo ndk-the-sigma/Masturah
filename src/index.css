@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   CyGirl design system — violet + electric blue, midnight base.
+   All colors in HSL. No raw colors in components.
+   ========================================================================== */
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background: 258 60% 5%;            /* midnight #0A0617-ish */
+    --background-elev: 258 50% 8%;
+    --foreground: 240 30% 96%;
+
+    --card: 258 45% 9%;
+    --card-foreground: 240 30% 96%;
+
+    --popover: 258 50% 7%;
+    --popover-foreground: 240 30% 96%;
+
+    /* Brand */
+    --primary: 264 90% 66%;              /* violet */
+    --primary-foreground: 258 60% 5%;
+    --primary-glow: 264 100% 75%;
+
+    --accent: 220 100% 62%;              /* electric blue */
+    --accent-foreground: 258 60% 5%;
+    --accent-glow: 215 100% 70%;
+
+    --secondary: 258 35% 14%;
+    --secondary-foreground: 240 30% 96%;
+
+    --muted: 258 25% 14%;
+    --muted-foreground: 240 12% 70%;
+
+    --destructive: 0 75% 58%;
+    --destructive-foreground: 240 30% 96%;
+
+    --border: 258 30% 18%;
+    --input: 258 35% 14%;
+    --ring: 264 90% 66%;
+
+    --radius: 0.625rem;                   /* 10px — single base radius */
+
+    /* Type scale (modular, ratio 1.25) */
+    --fs-xs: 0.78rem;
+    --fs-sm: 0.9rem;
+    --fs-base: 1rem;
+    --fs-md: 1.125rem;
+    --fs-lg: 1.4rem;
+    --fs-xl: 1.85rem;
+    --fs-2xl: 2.4rem;
+    --fs-3xl: 3.1rem;
+
+    /* Easing curves */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Gradients */
+    --gradient-brand: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(258 50% 8% / 0.6) 0%, hsl(258 60% 5% / 0.9) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 1px 0 hsl(var(--border));
+    --shadow-elev: 0 8px 24px -12px hsl(258 80% 2% / 0.6);
+
+    /* Sidebar (kept for shadcn compatibility) */
+    --sidebar-background: 258 50% 7%;
+    --sidebar-foreground: 240 30% 96%;
+    --sidebar-primary: 264 90% 66%;
+    --sidebar-primary-foreground: 258 60% 5%;
+    --sidebar-accent: 258 35% 14%;
+    --sidebar-accent-foreground: 240 30% 96%;
+    --sidebar-border: 258 30% 18%;
+    --sidebar-ring: 264 90% 66%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: var(--fs-base);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: "Space Grotesk", "Inter", sans-serif;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  h1 { font-size: var(--fs-3xl); }
+  h2 { font-size: var(--fs-2xl); }
+  h3 { font-size: var(--fs-xl); }
+  h4 { font-size: var(--fs-lg); font-weight: 500; }
+
+  p { margin-bottom: 1rem; max-width: 65ch; }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+    color: hsl(var(--foreground));
+  }
+
+  ::-webkit-scrollbar { width: 0; height: 0; }
+}
+
+@layer components {
+  .container-prose {
+    @apply mx-auto px-6 md:px-10;
+    max-width: 1120px;
+  }
+
+  .text-mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    letter-spacing: 0;
+  }
+
+  .surface {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+  }
+
+  .surface-elev {
+    background: var(--gradient-surface);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px);
+  }
+
+  /* Subtle 2px lift on hover — brand-disciplined */
+  .lift {
+    transition: transform 220ms var(--ease-out), border-color 220ms var(--ease-out);
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+}
+
+@layer utilities {
+  .text-gradient-brand {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
